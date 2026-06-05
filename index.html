@@ -192,9 +192,11 @@ body{
         Submit Review
     </button>
 
-    <button class="btn pay-btn" onclick="payNow()">
+   <a href="upi://pay?pa=8168781636@axl&pn=Prime%20Property%20Jind&cu=INR">
+    <button class="btn pay-btn">
         💰 Pay Us
     </button>
+   </a>
 
     <div class="message" id="message"></div>
 
@@ -251,14 +253,6 @@ function submitReview(){
     }
 }
 
-function payNow(){
-
-    // Replace the VPA below with your actual UPI ID for best results
-    const upiLink =
-    "upi://pay?pa=8168781636@axl";
-
-    window.location.href = upiLink;
-}
 
 </script>
 
