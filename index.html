@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Property Jind - Feedback</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    background:#fff;
+    width:100%;
+    max-width:450px;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#222;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:25px;
+}
+
+.stars{
+    display:flex;
+    justify-content:center;
+    flex-direction:row-reverse;
+    gap:5px;
+    margin-bottom:25px;
+}
+
+.stars input{
+    display:none;
+}
+
+.stars label{
+    font-size:40px;
+    cursor:pointer;
+    color:#ddd;
+    transition:.3s;
+}
+
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label{
+    color:#ffc107;
+}
+
+button{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+.message{
+    margin-top:20px;
+    color:#28a745;
+    font-weight:bold;
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo">Prime Property Jind</div>
+    <p class="subtitle">How was your experience with us?</p>
+
+    <div class="stars">
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5">?</label>
+
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4">?</label>
+
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3">?</label>
+
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2">?</label>
+
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1">?</label>
+    </div>
+
+    <button onclick="submitReview()">Submit</button>
+
+    <div class="message" id="message"></div>
+
+</div>
+
+<script>
+
+const googleReviewLink =
+"https://www.google.com/search?sca_esv=91390b2ecb4203d7&rlz=1C1JJTC_enIN1207IN1207&sxsrf=ANbL-n56kcLIdZy8FCyeX7vM-mpWead-9w:1780662708231&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOaPYhQ4v85CfNr1lxMtCaO2Kaa22FcH02InUPMUXKBVry9b1SvhoeZ-ZnZTT5c7zl2_486Xr8rZKHnpOxZMYHs0RtbZX7v9ia13ZSEat2idFJfPjbA%3D%3D&q=Prime+Property+Jind+Reviews&sa=X&ved=2ahUKEwjFg8HBjfCUAxWxbGwGHUNdHnAQ0bkNegQIIxAH&biw=1920&bih=953&dpr=1#lrd=0x39120521481418c3:0xa82c49c1a18748a5,3,,,,";
+
+const thankYouMessages = [
+"Thank you for your feedback!",
+"We appreciate your valuable review.",
+"Thanks for helping us improve.",
+"Your feedback means a lot to us.",
+"Thank you for sharing your experience.",
+"We appreciate your time and support.",
+"Your review has been received successfully.",
+"Thanks for letting us know your thoughts.",
+"We value your opinion greatly.",
+"Thank you for choosing Prime Property Jind."
+];
+
+function submitReview(){
+
+    const selected = document.querySelector('input[name="rating"]:checked');
+
+    if(!selected){
+        alert("Please select a rating.");
+        return;
+    }
+
+    const rating = parseInt(selected.value);
+
+    if(rating >= 4){
+        window.location.href = googleReviewLink;
+    }else{
+        const randomMessage =
+        thankYouMessages[Math.floor(Math.random()*thankYouMessages.length)];
+
+        const msg = document.getElementById("message");
+        msg.innerText = randomMessage;
+        msg.style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>
