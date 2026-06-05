@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +26,7 @@ body{
 .container{
     background:#fff;
     width:100%;
-    max-width:450px;
+    max-width:500px;
     padding:35px;
     border-radius:15px;
     box-shadow:0 10px 25px rgba(0,0,0,0.1);
@@ -34,7 +34,7 @@ body{
 }
 
 .logo{
-    font-size:28px;
+    font-size:30px;
     font-weight:bold;
     color:#222;
     margin-bottom:10px;
@@ -43,6 +43,7 @@ body{
 .subtitle{
     color:#666;
     margin-bottom:25px;
+    font-size:16px;
 }
 
 .stars{
@@ -58,7 +59,7 @@ body{
 }
 
 .stars label{
-    font-size:40px;
+    font-size:50px;
     cursor:pointer;
     color:#ddd;
     transition:.3s;
@@ -70,19 +71,34 @@ body{
     color:#ffc107;
 }
 
-button{
-    background:#0d6efd;
-    color:white;
+.btn{
+    width:100%;
     border:none;
-    padding:12px 30px;
-    border-radius:8px;
+    padding:14px;
+    border-radius:10px;
     cursor:pointer;
     font-size:16px;
+    font-weight:bold;
     transition:.3s;
+    margin-top:10px;
 }
 
-button:hover{
+.submit-btn{
+    background:#0d6efd;
+    color:#fff;
+}
+
+.submit-btn:hover{
     background:#0b5ed7;
+}
+
+.pay-btn{
+    background:#28a745;
+    color:#fff;
+}
+
+.pay-btn:hover{
+    background:#218838;
 }
 
 .message{
@@ -90,6 +106,56 @@ button:hover{
     color:#28a745;
     font-weight:bold;
     display:none;
+    line-height:1.5;
+}
+
+.footer{
+    margin-top:20px;
+    color:#777;
+    font-size:13px;
+}
+
+@media(max-width:768px){
+
+    .container{
+        padding:25px;
+    }
+
+    .logo{
+        font-size:26px;
+    }
+
+    .stars label{
+        font-size:45px;
+    }
+
+    .btn{
+        font-size:15px;
+    }
+}
+
+@media(max-width:480px){
+
+    .container{
+        padding:20px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .subtitle{
+        font-size:14px;
+    }
+
+    .stars label{
+        font-size:38px;
+    }
+
+    .btn{
+        padding:12px;
+        font-size:14px;
+    }
 }
 </style>
 </head>
@@ -98,9 +164,13 @@ button:hover{
 <div class="container">
 
     <div class="logo">Prime Property Jind</div>
-    <p class="subtitle">How was your experience with us?</p>
+
+    <p class="subtitle">
+        How was your experience with us?
+    </p>
 
     <div class="stars">
+
         <input type="radio" id="star5" name="rating" value="5">
         <label for="star5">★</label>
 
@@ -115,18 +185,29 @@ button:hover{
 
         <input type="radio" id="star1" name="rating" value="1">
         <label for="star1">★</label>
+
     </div>
 
-    <button onclick="submitReview()">Submit</button>
+    <button class="btn submit-btn" onclick="submitReview()">
+        Submit Review
+    </button>
+
+    <button class="btn pay-btn" onclick="payNow()">
+        💰 Pay Us
+    </button>
 
     <div class="message" id="message"></div>
+
+    <div class="footer">
+        Prime Property Jind
+    </div>
 
 </div>
 
 <script>
 
 const googleReviewLink =
-"https://www.google.com/search?sca_esv=91390b2ecb4203d7&rlz=1C1JJTC_enIN1207IN1207&sxsrf=ANbL-n56kcLIdZy8FCyeX7vM-mpWead-9w:1780662708231&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOaPYhQ4v85CfNr1lxMtCaO2Kaa22FcH02InUPMUXKBVry9b1SvhoeZ-ZnZTT5c7zl2_486Xr8rZKHnpOxZMYHs0RtbZX7v9ia13ZSEat2idFJfPjbA%3D%3D&q=Prime+Property+Jind+Reviews&sa=X&ved=2ahUKEwjFg8HBjfCUAxWxbGwGHUNdHnAQ0bkNegQIIxAH&biw=1920&bih=953&dpr=1#lrd=0x39120521481418c3:0xa82c49c1a18748a5,3,,,,";
+"https://www.google.com/search?sca_esv=91390b2ecb4203d7&rlz=1C1JJTC_enIN1207IN1207&sxsrf=ANbL-n56kcLIdZy8FCyeX7vM-mpWead-9w:1780662708231&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOaPYhQ4v85CfNr1lxMtCaO2Kaa22FcH02InUPMUXKBVry9b1SvhoeZ-ZnZTT5c7zl2_486Xr8rZKHnpOxZMYHs0RtbZX7v9ia13ZSEat2idFJfPjbA%3D%3D&q=Prime+Property+Jind+Reviews&sa=X&ved=2ahUKEwjFg8HBjfCUAxWxbGwGHUNdHnAQ0bkNegQIIxAH";
 
 const thankYouMessages = [
 "Thank you for your feedback!",
@@ -143,7 +224,8 @@ const thankYouMessages = [
 
 function submitReview(){
 
-    const selected = document.querySelector('input[name="rating"]:checked');
+    const selected =
+    document.querySelector('input[name="rating"]:checked');
 
     if(!selected){
         alert("Please select a rating.");
@@ -155,13 +237,27 @@ function submitReview(){
     if(rating >= 4){
         window.location.href = googleReviewLink;
     }else{
-        const randomMessage =
-        thankYouMessages[Math.floor(Math.random()*thankYouMessages.length)];
 
-        const msg = document.getElementById("message");
+        const randomMessage =
+        thankYouMessages[
+        Math.floor(Math.random()*thankYouMessages.length)
+        ];
+
+        const msg =
+        document.getElementById("message");
+
         msg.innerText = randomMessage;
         msg.style.display = "block";
     }
+}
+
+function payNow(){
+
+    // Replace the VPA below with your actual UPI ID for best results
+    const upiLink =
+    "upi://pay?pa=7206962880@ptyes&pn=Prime%20Property%20Jind";
+
+    window.location.href = upiLink;
 }
 
 </script>
